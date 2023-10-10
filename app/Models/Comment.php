@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 use App\Models\Scopes\ShowLatest;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
@@ -19,6 +20,12 @@ class Comment extends Model
         'user_id'
         
     ];
+
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
+
     public function post(){
         return $this->belongsTo(Post::class);
     }

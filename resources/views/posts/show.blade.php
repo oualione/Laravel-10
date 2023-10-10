@@ -7,7 +7,7 @@
     <hr>
      <x-tag :tags="$post->tags"></x-tag>
     <hr>
-   @if ($post->comments->count() > 0)
+   @if ($post->comments)
     <h3>Comments:</h3>
     <ul>
         @foreach ($comments as $comment)
@@ -16,8 +16,8 @@
             <x-updated :date="$post->updated_at" :name="$comment->user->name" :userId="$post->user->id"></x-updated>
         @endforeach
     </ul>
-
-    @include('comment.form', ['id' => $post->id])
+    <x-comment-form :action="route('posts.comments.store', ['post' => $post->id])"></x-comment-form>
+    {{-- @include('comment.form', ['id' => $post->id]) --}}
 @else
     <p>No comments yet.</p>
 @endif

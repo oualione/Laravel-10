@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{mix('/css/app.css')}}">
     <link rel="stylesheet" href="{{mix('/css/bootstrap.min.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css" rel="stylesheet">
-    <link href="{{ asset('css/quartz.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/material.css') }}" rel="stylesheet">
        <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

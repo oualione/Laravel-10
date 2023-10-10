@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Comment;
 use App\Models\Scopes\DeletedPostAbiltyByAdmin;
 use App\Models\Scopes\ShowLatest;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,10 +31,16 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
+   //  we change this relation from one to many to Morph one to many
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
+
+    public function comments() : MorphMany {
+        return $this->morphMany(Comment::class, 'commentable');
     }
+    
 
     public function scopeMostCommentedPost($query){
         return $query->withCount('comments')->orderBy('comments_count','desc');
@@ -70,6 +77,8 @@ class Post extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+
 
     
     

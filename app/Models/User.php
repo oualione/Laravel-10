@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,8 +61,13 @@ class User extends Authenticatable
      ->orderBy('post_count', 'desc');
     }
 
-    public function comments(){
-        return $this->hasMany(Comment::class);
+    //  we change this relation from one to many to Morph one to many
+    // public function comments(){
+    //     return $this->hasMany(Comment::class);
+    // }
+
+    public function comments() : MorphMany {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function image() : MorphOne
